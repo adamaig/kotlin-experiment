@@ -68,7 +68,7 @@ As a customer, I want to add items to my shopping cart so that I can collect pro
 - When adding the same item multiple times, the system increments the quantity of the existing entry rather than creating duplicate entries
 - When adding an item that would exceed capacity (e.g., adding quantity 2 to a cart with quantity 2), the entire operation is rejected with no partial additions
 - Concurrent add operations use optimistic locking - if cart state changes between read and write, the operation detects the conflict and requires retry with fresh cart state
-- What if an item becomes unavailable after being added to cart?
+- Item availability changes after adding to cart are handled outside cart domain scope (future enhancement)
 
 ## Requirements
 
@@ -114,4 +114,4 @@ As a customer, I want to add items to my shopping cart so that I can collect pro
 - [x] User scenarios defined
 - [x] Requirements generated
 - [x] Entities identified
-- [ ] Review checklist passed (pending clarifications)
+- [x] Review checklist passed

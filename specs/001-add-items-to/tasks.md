@@ -24,9 +24,9 @@
    → Different modules/files = [P] parallel
    → Tests before implementation (TDD)
    → Domain → Infrastructure → Applications
-5. Number tasks sequentially (T001-T040)
+5. Number tasks sequentially (T001-T051)
 6. Generate dependency graph with constitutional TDD approach
-7. SUCCESS: 40 tasks ready for execution
+7. SUCCESS: 51 tasks ready for execution
 ```
 
 ## Format: `[ID] [P?] Description`
@@ -82,56 +82,57 @@ http-app/src/test/kotlin/         # HTTP API tests
 - [ ] T026 [P] EventStore interface contract tests in infrastructure/src/test/kotlin/eventstore/EventStoreContractTest.kt
 - [ ] T027 [P] InMemoryEventStore tests in infrastructure/src/test/kotlin/eventstore/InMemoryEventStoreTest.kt  
 - [ ] T028 [P] CartRepository tests in infrastructure/src/test/kotlin/repositories/CartRepositoryTest.kt
+- [ ] T029 [P] Cart persistence validation tests in infrastructure/src/test/kotlin/repositories/CartPersistenceTest.kt
 
 ## Phase 3.5: Infrastructure Implementation  
-- [ ] T029 EventStore interface in domain/src/main/kotlin/eventstore/EventStore.kt
-- [ ] T030 [P] EventEnvelope data class in infrastructure/src/main/kotlin/eventstore/EventEnvelope.kt
-- [ ] T031 InMemoryEventStore implementation in infrastructure/src/main/kotlin/eventstore/InMemoryEventStore.kt
-- [ ] T032 [P] CartRepository interface in domain/src/main/kotlin/repositories/CartRepository.kt
-- [ ] T033 CartRepositoryImpl in infrastructure/src/main/kotlin/repositories/CartRepositoryImpl.kt
+- [ ] T030 EventStore interface in domain/src/main/kotlin/eventstore/EventStore.kt
+- [ ] T031 [P] EventEnvelope data class in infrastructure/src/main/kotlin/eventstore/EventEnvelope.kt
+- [ ] T032 InMemoryEventStore implementation in infrastructure/src/main/kotlin/eventstore/InMemoryEventStore.kt
+- [ ] T033 [P] CartRepository interface in domain/src/main/kotlin/repositories/CartRepository.kt
+- [ ] T034 CartRepositoryImpl in infrastructure/src/main/kotlin/repositories/CartRepositoryImpl.kt
 
 ## Phase 3.6: Domain Service Implementation
-- [ ] T034 CartService interface in domain/src/main/kotlin/services/CartService.kt
-- [ ] T035 CartService implementation with event sourcing logic in infrastructure/src/main/kotlin/services/CartServiceImpl.kt
+- [ ] T035 CartService interface in domain/src/main/kotlin/services/CartService.kt
+- [ ] T036 CartService implementation with event sourcing logic in infrastructure/src/main/kotlin/services/CartServiceImpl.kt
 
 ## Phase 3.7: CLI Application Tests First
-- [ ] T036 [P] CLI command parsing tests in cli-app/src/test/kotlin/commands/AddItemCommandTest.kt
-- [ ] T037 [P] CLI integration tests in cli-app/src/test/kotlin/integration/CliIntegrationTest.kt
+- [ ] T037 [P] CLI command parsing tests in cli-app/src/test/kotlin/commands/AddItemCommandTest.kt
+- [ ] T038 [P] CLI integration tests in cli-app/src/test/kotlin/integration/CliIntegrationTest.kt
 
 ## Phase 3.8: CLI Application Implementation
-- [ ] T038 AddItemCommand handler in cli-app/src/main/kotlin/commands/AddItemCommand.kt
-- [ ] T039 CLI main application in cli-app/src/main/kotlin/Main.kt
+- [ ] T039 AddItemCommand handler in cli-app/src/main/kotlin/commands/AddItemCommand.kt
+- [ ] T040 CLI main application in cli-app/src/main/kotlin/Main.kt
 
 ## Phase 3.9: HTTP API Tests First  
-- [ ] T040 [P] HTTP API contract tests in http-app/src/test/kotlin/api/CartApiContractTest.kt
-- [ ] T041 [P] HTTP API integration tests in http-app/src/test/kotlin/integration/ApiIntegrationTest.kt
+- [ ] T041 [P] HTTP API contract tests in http-app/src/test/kotlin/api/CartApiContractTest.kt
+- [ ] T042 [P] HTTP API integration tests in http-app/src/test/kotlin/integration/ApiIntegrationTest.kt
 
 ## Phase 3.10: HTTP API Implementation
-- [ ] T042 POST /carts/{cartId}/items endpoint in http-app/src/main/kotlin/handlers/AddItemHandler.kt
-- [ ] T043 POST /carts/items endpoint in http-app/src/main/kotlin/handlers/CreateCartHandler.kt  
-- [ ] T044 GET /carts/{cartId} endpoint in http-app/src/main/kotlin/handlers/GetCartHandler.kt
-- [ ] T045 HTTP server setup and routing in http-app/src/main/kotlin/Server.kt
+- [ ] T043 POST /carts/{cartId}/items endpoint in http-app/src/main/kotlin/handlers/AddItemHandler.kt
+- [ ] T044 POST /carts/items endpoint in http-app/src/main/kotlin/handlers/CreateCartHandler.kt  
+- [ ] T045 GET /carts/{cartId} endpoint in http-app/src/main/kotlin/handlers/GetCartHandler.kt
+- [ ] T046 HTTP server setup and routing in http-app/src/main/kotlin/Server.kt
 
 ## Phase 3.11: Integration & Polish
-- [ ] T046 [P] End-to-end acceptance validation tests in tests/acceptance/
-- [ ] T047 [P] Performance benchmarks for EventStore operations in tests/performance/
-- [ ] T048 [P] Update project README.md with quickstart instructions
-- [ ] T049 [P] Generate API documentation from contracts
-- [ ] T050 Final constitutional compliance validation and cleanup
+- [ ] T047 [P] End-to-end acceptance validation tests in tests/acceptance/
+- [ ] T048 [P] Performance benchmarks for EventStore operations in tests/performance/
+- [ ] T049 [P] Update project README.md with quickstart instructions
+- [ ] T050 [P] Generate API documentation from contracts
+- [ ] T051 Final constitutional compliance validation and cleanup
 
 ## Dependencies
 **Critical Path (must be sequential)**:
 - Setup (T001-T007) → Domain Tests (T008-T015) → Domain Implementation (T016-T025)
-- Domain complete → Infrastructure Tests (T026-T028) → Infrastructure (T029-T035)
-- Core complete → Application Tests (T036-T037, T040-T041) → Applications (T038-T039, T042-T045)
-- All implementation → Polish (T046-T050)
+- Domain complete → Infrastructure Tests (T026-T029) → Infrastructure (T030-T036)
+- Core complete → Application Tests (T037-T038, T041-T042) → Applications (T039-T040, T043-T046)
+- All implementation → Polish (T047-T051)
 
 **Blocking Dependencies**:
 - T020 (Cart) depends on T016-T019 (value objects, LineItem)
-- T031 (InMemoryEventStore) depends on T029 (EventStore interface)  
-- T035 (CartServiceImpl) depends on T029, T032, T034
-- T038-T039 (CLI) depend on T035 (CartService)
-- T042-T045 (HTTP) depend on T035 (CartService)
+- T032 (InMemoryEventStore) depends on T030 (EventStore interface)  
+- T036 (CartServiceImpl) depends on T030, T033, T035
+- T039-T040 (CLI) depend on T036 (CartService)
+- T043-T046 (HTTP) depend on T036 (CartService)
 
 ## Parallel Execution Examples
 
@@ -166,18 +167,18 @@ Task: "CartCreated event in domain/src/main/kotlin/events/CartCreated.kt"
 *GATE: Must verify before proceeding to implementation*
 
 - [ ] All domain tests (T008-T015) written and FAILING
-- [ ] All infrastructure tests (T026-T028) written and FAILING  
-- [ ] All application tests (T036-T037, T040-T041) written and FAILING
+- [ ] All infrastructure tests (T026-T029) written and FAILING  
+- [ ] All application tests (T037-T038, T041-T042) written and FAILING
 - [ ] No implementation code exists when tests are written
 - [ ] Each test validates specific acceptance criteria from quickstart.md
 - [ ] Tests cover constitutional requirements (domain purity, event sourcing)
 
 ## Constitutional Compliance Notes
 - **Domain Purity**: Tasks T016-T025 must have zero external dependencies
-- **Event Sourcing**: All state changes through events (T021-T023, T031)
+- **Event Sourcing**: All state changes through events (T021-T023, T032)
 - **TDD Approach**: All test tasks before corresponding implementation tasks
 - **Architectural Separation**: Clear module boundaries enforced through dependencies
-- **In-Memory Priority**: EventStore starts as in-memory implementation (T031)
+- **In-Memory Priority**: EventStore starts as in-memory implementation (T032)
 
 ## Notes
 - [P] tasks target different files/modules with no shared dependencies

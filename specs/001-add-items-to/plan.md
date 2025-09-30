@@ -35,7 +35,7 @@ Implement shopping cart functionality with item addition, quantity management, a
 
 ## Technical Context
 **Language/Version**: Kotlin (targeting JVM, multiplatform capability where beneficial)  
-**Primary Dependencies**: Kotlin stdlib only for domain layer, Gradle for build management  
+**Primary Dependencies**: Kotlin stdlib only for domain layer, Ktor for HTTP server, Gradle for build management  
 **Storage**: In-memory Event Store implementation (per constitutional priority)  
 **Testing**: Kotlin Test framework, TDD approach with Red→Green→Refactor cycles  
 **Target Platform**: JVM/JRE (Linux development environment, cross-platform capability)
