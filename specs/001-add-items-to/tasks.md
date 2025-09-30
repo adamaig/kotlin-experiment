@@ -46,79 +46,79 @@ http-app/src/test/kotlin/         # HTTP API tests
 ```
 
 ## Phase 3.1: Project Setup
-- [ ] T001 Initialize Gradle multi-module project with settings.gradle.kts and root build.gradle.kts
-- [ ] T002 [P] Configure domain module build.gradle.kts with Kotlin stdlib only
-- [ ] T003 [P] Configure infrastructure module build.gradle.kts depending on domain
-- [ ] T004 [P] Configure cli-app module build.gradle.kts depending on domain and infrastructure
-- [ ] T005 [P] Configure http-app module build.gradle.kts depending on domain and infrastructure
-- [ ] T006 [P] Setup Kotlin test framework and assertion library dependencies
+- [x] T001 Initialize Gradle multi-module project with settings.gradle.kts and root build.gradle.kts
+- [x] T002 [P] Configure domain module build.gradle.kts with Kotlin stdlib only
+- [x] T003 [P] Configure infrastructure module build.gradle.kts depending on domain
+- [x] T004 [P] Configure cli-app module build.gradle.kts depending on domain and infrastructure
+- [x] T005 [P] Configure http-app module build.gradle.kts depending on domain and infrastructure
+- [x] T006 [P] Setup Kotlin test framework and assertion library dependencies
 - [ ] T007 [P] Configure linting with ktlint and code formatting
 
 ## Phase 3.2: Domain Tests First (TDD) ⚠️ MUST COMPLETE BEFORE 3.3
 **CRITICAL: These tests MUST be written and MUST FAIL before ANY domain implementation**
-- [ ] T008 [P] Value object tests in domain/src/test/kotlin/cart/ProductIdTest.kt
-- [ ] T009 [P] Value object tests in domain/src/test/kotlin/cart/CartIdTest.kt  
-- [ ] T010 [P] Value object tests in domain/src/test/kotlin/cart/EventVersionTest.kt
-- [ ] T011 [P] LineItem entity tests in domain/src/test/kotlin/cart/LineItemTest.kt
-- [ ] T012 [P] Cart aggregate tests in domain/src/test/kotlin/cart/CartTest.kt
-- [ ] T013 [P] Domain event tests in domain/src/test/kotlin/events/CartEventsTest.kt
+- [x] T008 [P] Value object tests in domain/src/test/kotlin/cart/ProductIdTest.kt
+- [x] T009 [P] Value object tests in domain/src/test/kotlin/cart/CartIdTest.kt  
+- [x] T010 [P] Value object tests in domain/src/test/kotlin/cart/EventVersionTest.kt
+- [x] T011 [P] LineItem entity tests in domain/src/test/kotlin/cart/LineItemTest.kt
+- [x] T012 [P] Cart aggregate tests in domain/src/test/kotlin/cart/CartTest.kt
+- [x] T013 [P] Domain event tests in domain/src/test/kotlin/events/CartEventsTest.kt
 - [ ] T014 [P] AddItemToCart command tests in domain/src/test/kotlin/commands/AddItemToCartTest.kt
 - [ ] T015 Cart acceptance scenario tests in domain/src/test/kotlin/cart/CartAcceptanceTest.kt
 
 ## Phase 3.3: Domain Implementation (ONLY after tests are failing)
-- [ ] T016 [P] ProductId value class in domain/src/main/kotlin/cart/ProductId.kt
-- [ ] T017 [P] CartId value class in domain/src/main/kotlin/cart/CartId.kt
-- [ ] T018 [P] EventVersion value class in domain/src/main/kotlin/events/EventVersion.kt
-- [ ] T019 [P] LineItem entity in domain/src/main/kotlin/cart/LineItem.kt
-- [ ] T020 Cart aggregate root in domain/src/main/kotlin/cart/Cart.kt
-- [ ] T021 [P] DomainEvent interface in domain/src/main/kotlin/events/DomainEvent.kt
-- [ ] T022 [P] CartCreated event in domain/src/main/kotlin/events/CartCreated.kt
-- [ ] T023 [P] ItemAddedToCart event in domain/src/main/kotlin/events/ItemAddedToCart.kt
-- [ ] T024 [P] AddItemToCart command in domain/src/main/kotlin/commands/AddItemToCart.kt
-- [ ] T025 Domain exceptions in domain/src/main/kotlin/exceptions/CartExceptions.kt
+- [x] T016 [P] ProductId value class in domain/src/main/kotlin/cart/ProductId.kt
+- [x] T017 [P] CartId value class in domain/src/main/kotlin/cart/CartId.kt
+- [x] T018 [P] EventVersion value class in domain/src/main/kotlin/events/EventVersion.kt
+- [x] T019 [P] LineItem entity in domain/src/main/kotlin/cart/LineItem.kt
+- [x] T020 Cart aggregate root in domain/src/main/kotlin/cart/Cart.kt
+- [x] T021 [P] DomainEvent interface in domain/src/main/kotlin/events/DomainEvent.kt
+- [x] T022 [P] CartCreated event in domain/src/main/kotlin/events/CartCreated.kt
+- [x] T023 [P] ItemAddedToCart event in domain/src/main/kotlin/events/ItemAddedToCart.kt
+- [x] T024 [P] AddItemToCart command in domain/src/main/kotlin/commands/AddItemToCart.kt
+- [x] T025 Domain exceptions in domain/src/main/kotlin/exceptions/CartExceptions.kt
 
 ## Phase 3.4: Infrastructure Tests First
 **CRITICAL: Infrastructure tests before implementation**
-- [ ] T026 [P] EventStore interface contract tests in infrastructure/src/test/kotlin/eventstore/EventStoreContractTest.kt
-- [ ] T027 [P] InMemoryEventStore tests in infrastructure/src/test/kotlin/eventstore/InMemoryEventStoreTest.kt  
-- [ ] T028 [P] CartRepository tests in infrastructure/src/test/kotlin/repositories/CartRepositoryTest.kt
-- [ ] T029 [P] Cart persistence validation tests in infrastructure/src/test/kotlin/repositories/CartPersistenceTest.kt
+- [x] T026 [P] EventStore interface contract tests in infrastructure/src/test/kotlin/eventstore/EventStoreContractTest.kt
+- [x] T027 [P] InMemoryEventStore tests in infrastructure/src/test/kotlin/eventstore/InMemoryEventStoreTest.kt  
+- [x] T028 [P] CartRepository tests in infrastructure/src/test/kotlin/repositories/CartRepositoryTest.kt
+- [x] T029 [P] Cart persistence validation tests in infrastructure/src/test/kotlin/repositories/CartPersistenceTest.kt
 
 ## Phase 3.5: Infrastructure Implementation  
-- [ ] T030 EventStore interface in domain/src/main/kotlin/eventstore/EventStore.kt
-- [ ] T031 [P] EventEnvelope data class in infrastructure/src/main/kotlin/eventstore/EventEnvelope.kt
-- [ ] T032 InMemoryEventStore implementation in infrastructure/src/main/kotlin/eventstore/InMemoryEventStore.kt
-- [ ] T033 [P] CartRepository interface in domain/src/main/kotlin/repositories/CartRepository.kt
-- [ ] T034 CartRepositoryImpl in infrastructure/src/main/kotlin/repositories/CartRepositoryImpl.kt
+- [x] T030 EventStore interface in domain/src/main/kotlin/eventstore/EventStore.kt
+- [x] T031 [P] EventEnvelope data class in infrastructure/src/main/kotlin/eventstore/EventEnvelope.kt
+- [x] T032 InMemoryEventStore implementation in infrastructure/src/main/kotlin/eventstore/InMemoryEventStore.kt
+- [x] T033 [P] CartRepository interface in domain/src/main/kotlin/repositories/CartRepository.kt
+- [x] T034 CartRepositoryImpl in infrastructure/src/main/kotlin/repositories/CartRepositoryImpl.kt
 
 ## Phase 3.6: Domain Service Implementation
-- [ ] T035 CartService interface in domain/src/main/kotlin/services/CartService.kt
-- [ ] T036 CartService implementation with event sourcing logic in infrastructure/src/main/kotlin/services/CartServiceImpl.kt
+- [x] T035 CartService interface in domain/src/main/kotlin/services/CartService.kt
+- [x] T036 CartService implementation with event sourcing logic in infrastructure/src/main/kotlin/services/CartServiceImpl.kt
 
 ## Phase 3.7: CLI Application Tests First
-- [ ] T037 [P] CLI command parsing tests in cli-app/src/test/kotlin/commands/AddItemCommandTest.kt
-- [ ] T038 [P] CLI integration tests in cli-app/src/test/kotlin/integration/CliIntegrationTest.kt
+- [x] T037 [P] CLI command parsing tests in cli-app/src/test/kotlin/commands/AddItemCommandTest.kt
+- [x] T038 [P] CLI integration tests in cli-app/src/test/kotlin/integration/CliIntegrationTest.kt
 
 ## Phase 3.8: CLI Application Implementation
-- [ ] T039 AddItemCommand handler in cli-app/src/main/kotlin/commands/AddItemCommand.kt
-- [ ] T040 CLI main application in cli-app/src/main/kotlin/Main.kt
+- [x] T039 AddItemCommand handler in cli-app/src/main/kotlin/commands/AddItemCommand.kt
+- [x] T040 CLI main application in cli-app/src/main/kotlin/Main.kt
 
 ## Phase 3.9: HTTP API Tests First  
-- [ ] T041 [P] HTTP API contract tests in http-app/src/test/kotlin/api/CartApiContractTest.kt
-- [ ] T042 [P] HTTP API integration tests in http-app/src/test/kotlin/integration/ApiIntegrationTest.kt
+- [x] T041 [P] HTTP API contract tests in http-app/src/test/kotlin/api/CartApiContractTest.kt
+- [x] T042 [P] HTTP API integration tests in http-app/src/test/kotlin/integration/ApiIntegrationTest.kt
 
 ## Phase 3.10: HTTP API Implementation
-- [ ] T043 POST /carts/{cartId}/items endpoint in http-app/src/main/kotlin/handlers/AddItemHandler.kt
-- [ ] T044 POST /carts/items endpoint in http-app/src/main/kotlin/handlers/CreateCartHandler.kt  
-- [ ] T045 GET /carts/{cartId} endpoint in http-app/src/main/kotlin/handlers/GetCartHandler.kt
-- [ ] T046 HTTP server setup and routing in http-app/src/main/kotlin/Server.kt
+- [x] T043 POST /carts/{cartId}/items endpoint in http-app/src/main/kotlin/handlers/AddItemHandler.kt
+- [x] T044 POST /carts/items endpoint in http-app/src/main/kotlin/handlers/CreateCartHandler.kt  
+- [x] T045 GET /carts/{cartId} endpoint in http-app/src/main/kotlin/handlers/GetCartHandler.kt
+- [x] T046 HTTP server setup and routing in http-app/src/main/kotlin/Server.kt
 
 ## Phase 3.11: Integration & Polish
-- [ ] T047 [P] End-to-end acceptance validation tests in tests/acceptance/
-- [ ] T048 [P] Performance benchmarks for EventStore operations in tests/performance/
-- [ ] T049 [P] Update project README.md with quickstart instructions
-- [ ] T050 [P] Generate API documentation from contracts
-- [ ] T051 Final constitutional compliance validation and cleanup
+- [x] T047 [P] End-to-end acceptance validation tests in tests/acceptance/
+- [x] T048 [P] Performance benchmarks for EventStore operations in tests/performance/
+- [x] T049 [P] Update project README.md with quickstart instructions
+- [x] T050 [P] Generate API documentation from contracts
+- [x] T051 Final constitutional compliance validation and cleanup
 
 ## Dependencies
 **Critical Path (must be sequential)**:
