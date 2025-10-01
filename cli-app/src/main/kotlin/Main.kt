@@ -2,8 +2,21 @@ import cart.ProductId
 import commands.AddItemToCart
 import eventstore.InMemoryEventStore
 import services.CartServiceImpl
+import cli.RemoveItemCommandHandler
+import kotlin.system.exitProcess
 
-fun main() {
+fun main(args: Array<String>) {
+    if (args.isNotEmpty() && args[0] == "remove-item") {
+        // Handle remove-item command
+        val eventStore = InMemoryEventStore()
+        val cartService = CartServiceImpl(eventStore)
+        val handler = RemoveItemCommandHandler(cartService)
+        
+        val exitCode = handler.execute(args.drop(1).toTypedArray())
+        exitProcess(exitCode)
+    }
+    
+    // Original demo code
     println("🛒 Kotlin Cart Demo - Event Sourcing Implementation")
     println("=" .repeat(50))
     

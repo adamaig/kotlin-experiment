@@ -122,4 +122,72 @@ class CartTest {
         assertTrue(cart.canAddItem(3))
         assertFalse(cart.canAddItem(4))
     }
+
+    // T007: Cart.removeItem() method tests
+    @Test
+    fun `should remove partial quantity from cart item`() {
+        // Given
+        val productId = ProductId("PROD-A")
+        val cart = createCartWithItem(productId, 3)
+
+        // When
+        val updatedCart = cart.removeItem(productId, 2)
+
+        // Then
+        assertEquals(1, updatedCart.lineItems[productId]?.quantity)
+        assertEquals(cart.version.increment(), updatedCart.version)
+    }
+
+    @Test
+    fun `should remove item completely when removing all quantity`() {
+        // Given
+        val productId = ProductId("PROD-B")
+        val cart = createCartWithItem(productId, 1)
+
+        // When
+        val updatedCart = cart.removeItem(productId)
+
+        // Then
+        assertFalse(updatedCart.lineItems.containsKey(productId))
+        assertEquals(cart.version.increment(), updatedCart.version)
+    }
+
+    @Test
+    fun `should throw ItemNotInCartException for non-existent item`() {
+        // Given
+        val existingProductId = ProductId("PROD-EXISTS")
+        val missingProductId = ProductId("PROD-MISSING")
+        val cart = createCartWithItem(existingProductId, 2)
+
+        // When & Then
+        assertFailsWith<ItemNotInCartException> {
+            cart.removeItem(missingProductId)
+        }
+    }
+
+    @Test
+    fun `should throw EmptyCartException for empty cart`() {
+        // Given
+        val cart = createEmptyCart()
+        val productId = ProductId("ANY-PROD")
+
+        // When & Then
+        assertFailsWith<EmptyCartException> {
+            cart.removeItem(productId)
+        }
+    }
+
+    @Test
+    fun `should remove item completely when no quantity specified`() {
+        // Given
+        val productId = ProductId("PROD-A")
+        val cart = createCartWithItem(productId, 2)
+
+        // When
+        val updatedCart = cart.removeItem(productId)
+
+        // Then - should remove all quantity
+        assertFalse(updatedCart.lineItems.containsKey(productId))
+        assertEquals(cart.version.increment(), updatedCart.version)
+    }
 }
