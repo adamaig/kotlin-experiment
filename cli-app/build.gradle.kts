@@ -15,7 +15,6 @@ dependencies {
     
     // Test dependencies
     testImplementation(kotlin("test"))
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 }
 
 application {

@@ -2,12 +2,19 @@ package services
 
 import cart.*
 import commands.AddItemToCart
+import commands.RemoveItemCommand
 import events.*
 import eventstore.EventStore
 
 interface CartService {
     fun addItemToCart(command: AddItemToCart): Result<AddItemResult>
+    fun removeItem(command: RemoveItemCommand): Result<RemoveItemResult>
 }
+
+data class RemoveItemResult(
+    val cart: Cart,
+    val events: List<DomainEvent>
+)
 
 data class AddItemResult(
     val cart: Cart,
@@ -109,9 +116,73 @@ class CartServiceImpl(
                         version = version
                     )
                 }
+                is ItemRemovedEvent -> {
+                    val existingItem = cart.lineItems[event.productId]
+                    if (existingItem != null) {
+                        if (event.remainingQuantity > 0) {
+                            val updatedItem = existingItem.copy(quantity = event.remainingQuantity)
+                            cart = cart.copy(
+                                lineItems = cart.lineItems + (event.productId to updatedItem),
+                                version = version
+                            )
+                        } else {
+                            // Remove item completely
+                            cart = cart.copy(
+                                lineItems = cart.lineItems - event.productId,
+                                version = version
+                            )
+                        }
+                    }
+                }
             }
         }
         
         return cart
+    }
+    
+    override fun removeItem(command: RemoveItemCommand): Result<RemoveItemResult> {
+        return try {
+            val cart = loadCart(command.cartId) ?: return Result.failure(
+                IllegalArgumentException("Cart ${command.cartId.value} not found")
+            )
+            
+            // Check version for concurrency control
+            if (cart.version != command.expectedVersion) {
+                return Result.failure(ConcurrencyException(
+                    command.cartId,
+                    command.expectedVersion,
+                    cart.version
+                ))
+            }
+            
+            // Use Cart domain method to perform removal
+            val updatedCart = try {
+                cart.removeItem(command.productId, 1)
+            } catch (e: Exception) {
+                return Result.failure(e)
+            }
+            
+            // Create domain event for the removal
+            val existingItem = cart.lineItems[command.productId]!!
+            val remainingQuantity = if (existingItem.quantity > 1) existingItem.quantity - 1 else 0
+            
+            val event = ItemRemovedEvent(
+                cartId = command.cartId,
+                productId = command.productId,
+                quantity = 1,
+                remainingQuantity = remainingQuantity,
+                version = updatedCart.version
+            )
+            
+            // Persist event
+            val appendResult = eventStore.append(cart.cartId.value, cart.version, listOf(event))
+            if (appendResult.isFailure) {
+                return Result.failure(appendResult.exceptionOrNull()!!)
+            }
+            
+            Result.success(RemoveItemResult(updatedCart, listOf(event)))
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 }
